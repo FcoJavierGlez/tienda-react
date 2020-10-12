@@ -4,6 +4,7 @@
 }
 body {
     margin: 0;
+    background-color: azure;
 }
 .likeLink {
     border: 0;
@@ -27,6 +28,9 @@ body {
 }
 .text-grey {
     color: gray;
+}
+.text-orange {
+    color: rgb(255, 81, 0);
 }
 .bold {
     font-weight: bold;
@@ -175,9 +179,10 @@ select:hover {
 #cart-count {
     color: orange;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
     position: relative;
     left: 25px;
+    top: -5px;
     text-align: center;
 }
 #shopping-cart {
@@ -195,6 +200,14 @@ select:hover {
     font-weight: bold;
     font-size: 18px;
     height: 3%;
+}
+#shopping-cart > header {
+    display: grid;
+    align-content: center;
+    grid-template-columns: 1fr 1fr;
+}
+#shopping-cart hr {
+    *margin: 0;
 }
 .item-list {
     height: 85%;
@@ -266,9 +279,89 @@ h1 {
     margin: 0;
     text-align: center;
 }
-/* div {
-    border: 1px solid rgb(255, 255, 255);
-} */
-/* .fa-bars:before {
-    content: "\f0c9";
-} */
+.main-container {
+    height: 92vh;
+    width: 82%;
+}
+.container-list {
+    width: 90%;
+    *border: 1px solid black;
+    margin: 0 auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    column-gap: 5px;
+    row-gap: 5px;
+    justify-content: center;
+}
+.item-list-main {
+    background-color: white;
+    border: 1px solid black;
+    *margin: 5px;
+    width: 260px;
+}
+.product-info {
+    height: 260px;
+}
+.product-info p {
+    padding: 0 0 3px 0;
+}
+.product-name {
+    height: 36px;
+}
+.image-list {
+    display: flex;
+    justify-content: center;
+}
+.image-list > img{
+    width: 250px;
+    height: 250px;
+    *border: 1px solid black;
+    text-align: center;
+}
+.product-info {
+    padding: 5px 20px;
+}
+.container-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+}
+.container-info p {
+    text-align: justify;
+    margin: 5px 0;
+    height: 105px;
+    overflow: hidden;
+}
+.container-info h2 {
+    margin: 5px 0;
+}
+.button-cart {
+    border: 0;
+    margin: 0 auto;
+    background-color: rgb(255, 192, 76);
+    color: black;
+    font-weight: bold;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+}
+.button-cart:hover {
+    background-color: orange;
+    color: white;
+}
+.height-32 {
+    height: 32px;
+}
+.grid {
+    display: grid;
+}
+.align-center {
+    align-content: center;
+}
+.pointer {
+    cursor: pointer;
+}
+.margin-hr-top-cart {
+    margin: 0 15px 9px 15px;
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-const ItemCart = ({item,id,changeUnit,onAddUnitItem,deleteItem}) => {
+const ItemCart = ({item,id,setUnitItem,deleteItem}) => {
     const [units,setUnits] = useState(1);
 
     /* useEffect( () => {
@@ -24,12 +24,12 @@ const ItemCart = ({item,id,changeUnit,onAddUnitItem,deleteItem}) => {
                         <button type="button" onClick={ () => {
                             if ( units == 1 ) return;
                             setUnits( units - 1 );
-                            changeUnit(item.id,item.ud - 1);
+                            setUnitItem(item.id,item.ud - 1);
                         }}>-</button>
                         <div className="text-center">{`x${item.ud}`}</div>
                         <button type="button" onClick={ () => {
                             setUnits( units + 1 );
-                            changeUnit(item.id,item.ud + 1);
+                            setUnitItem(item.id,item.ud + 1);
                         }}>+</button>
                     </div>
                     <div className="foot-item">
