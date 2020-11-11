@@ -15,37 +15,35 @@ const Index = () => {
 
         totalItems.innerHTML = shoppingCart.length;
         totalItems.style.left = (shoppingCart.length > 9 ? `21px` : `25px`);
+
+        setTotalPrice( shoppingCart.length == 0 ? "0.00" : shoppingCart.map( e => e.price*e.ud ).reduce( (e,acc) => e+acc ).toFixed(2) );
         
         priceCart.innerHTML = `Total a pagar: ${totalPrice}€`;
     });
 
     const setUnitItem = (id,ud) => {
-        shoppingCart.filter( e => e.id == id )[0].ud = ud;
-        setShoppingCart( shoppingCart );
-        setTotalPrice( shoppingCart.length == 0 ? 0 : shoppingCart.map( e => e.price*e.ud ).reduce( (e,acc) => e+acc ).toFixed(2) );
+        const NEW_CART = [...shoppingCart];
+        NEW_CART.find( e => e.id == id ).ud = ud;
+        setShoppingCart( NEW_CART );
     }
 
     const deleteItem = id => { 
-        const ITEM = ITEMS_DB.filter( e => e.id == id )[0];
+        const ITEM = ITEMS_DB.find( e => e.id == id );
         setShoppingCart( shoppingCart.filter( e => e.id !== id ) );
-        setTotalPrice( (totalPrice - shoppingCart.filter( e => e.id == id ).map( e => e.price*e.ud )).toFixed(2) );
         ITEM.ud       = 1;
         ITEM.intoCart = false;
     }
 
     const emptyCart = () => {
-        console.log(shoppingCart);
-        for (let i = shoppingCart.length-1; i > -1; i--) 
-            deleteItem( shoppingCart[i].id );
+        shoppingCart.map( e => deleteItem(e.id) );
         setShoppingCart([]);
-        setTotalPrice("0.00");
     }
 
     const addItem = item => {
-        ITEMS_DB.filter( e => e.id == item.id )[0].intoCart = true;
-        shoppingCart.push( ITEMS_DB.filter( e => e.id == item.id )[0] ); //No sé la razón, pero si no hago este push el array no se actualiza a tiempo y el precio no cambia, porqué ocurre esto???
-        setShoppingCart( shoppingCart );
-        setTotalPrice( shoppingCart.map( e => e.price*e.ud ).reduce( (e,acc) => e+acc ).toFixed(2) );
+        const NEW_CART = [...shoppingCart];
+        NEW_CART.push( ITEMS_DB.find( e => e.id == item.id) );
+        ITEMS_DB.find( e => e.id == item.id ).intoCart = true;
+        setShoppingCart( NEW_CART );
     }
 
     return (
@@ -57,7 +55,7 @@ const Index = () => {
             <div className="main-container scroll">
                 <div className="container-list">
                     {
-                        ITEMS_DB.map( (e,i) => <ItemList db={ITEMS_DB} item={e} key={e.id} id={e.id} addItem={addItem} /> )
+                        ITEMS_DB.map( e => <ItemList db={ITEMS_DB} item={e} key={e.id} id={e.id} addItem={addItem} /> )
                     }
                 </div>
             </div>
